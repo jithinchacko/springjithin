@@ -6,4 +6,4 @@ ENV javapath=/usr/local/openjdk-8/bin/java
 ADD  ${ftpserver} ${locallocation}
 EXPOSE 8080
 WORKDIR /usr/local/openjdk-8/bin/
-CMD [ "java", "-jar", ${locallocation} ]
+CMD [ "java" , "-jar", ${locallocation} ]
