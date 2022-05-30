@@ -5,4 +5,5 @@ ENV locallocation=/spring-petclinic-2.4.2.jar
 ENV javapath=/usr/local/openjdk-8/bin/java  
 ADD  ${ftpserver} ${locallocation}
 EXPOSE 8080
-CMD [ ${javapath}, "-jar", ${locallocation} ]
+WORKDIR /usr/local/openjdk-8/bin/
+CMD [ "java", "-jar", ${locallocation} ]
