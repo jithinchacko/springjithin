@@ -1,6 +1,6 @@
-FROM ubuntu:18.04 
-RUN apt update && apt install apache2 -y && apt install curl -y 
-HEALTHCHECK  CMD curl -f http://localhost/ || exit 1
-VOLUME [ "/var/www/html/" ]
-EXPOSE 80 
-CMD ["apache2ctl", "-D",  "FOREGROUND" ]
+FROM maven:3-jdk-8 AS stage1 
+RUN git clone https://github.com/jithinchacko/game-of-life.git && cd game-of-life && mvn package 
+
+FROM tomcat:8 
+COPY --from=stage1 /game-of-life/gameoflife-web/target/gameoflife.war /usr/local/tomcat/webapps/gameoflife.war 
+EXPOSE 8080
